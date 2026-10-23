@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Test runner stack: required for `dotnet test` to discover and run the
+         NUnit tests and for the XPlat coverage collector to attach.
+         Test.Sdk is pinned to the 16.x generation: its TestHost depends on
+         Newtonsoft.Json >= 9.0.1, which keeps the deliberately planted
+         Newtonsoft.Json 9.0.1 (PLANTED-CVES.md) intact; 17.x would force a
+         downgrade error (NU1605) or an upgrade that erases the planted CVE. -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
     <PackageReference Include="NUnit" Version="3.13.3" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.0" />
@@ -18,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OrderKit\OrderKit.csproj" />
+    <ProjectReference Include="..\..\src\OrderKit\OrderKit.csproj" />
   </ItemGroup>
 
 </Project>
